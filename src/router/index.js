@@ -1,6 +1,7 @@
-import CreateUserView from '@/components/CreateUserView.vue'
-import HomeView from '@/components/HomeView.vue'
-import UserManagementView from '@/components/UserManagementView.vue'
+import CalculatorView from '@/views/CalculatorView.vue'
+import CreateUserView from '@/views/CreateUserView.vue'
+import HomeView from '@/views/HomeView.vue'
+import UserManagementView from '@/views/UserManagementView.vue'
 import { createRouter, createWebHistory } from 'vue-router'
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -19,6 +20,11 @@ const router = createRouter({
       path: '/user/createUser',
       name: 'CreateUser',
       component: CreateUserView
+    },
+    {
+      path: '/calculator',
+      name: 'Calculator',
+      component: CalculatorView
     },
   ]
 })

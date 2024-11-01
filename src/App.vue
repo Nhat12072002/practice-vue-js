@@ -3,6 +3,8 @@
       <nav>
         <RouterLink class="nav-link" to="/">Home</RouterLink>
         <RouterLink class="nav-link" to="/user">User Management</RouterLink>
+        <RouterLink class="nav-link" to="/calculator">Calculator</RouterLink>
+
       </nav>
       <RouterView/>
   </div>

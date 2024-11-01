@@ -14,9 +14,10 @@ import { RouterLink, RouterView } from "vue-router";
 
 <style>
 nav{
-  height: 100%;
+  height: 50px;
   width: auto;
-  
+  background-color: antiquewhite;
+  display: flex;
 }
 .nav-link{
   gap: 5px;

@@ -1,3 +1,4 @@
+import CreateUserView from '@/components/CreateUserView.vue'
 import HomeView from '@/components/HomeView.vue'
 import UserManagementView from '@/components/UserManagementView.vue'
 import { createRouter, createWebHistory } from 'vue-router'
@@ -17,7 +18,7 @@ const router = createRouter({
     {
       path: '/user/createUser',
       name: 'CreateUser',
-      // component: UserManagementView
+      component: CreateUserView
     },
   ]
 })

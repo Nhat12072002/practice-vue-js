@@ -17,7 +17,7 @@
             </div>
             <div class="skill">
                 <label>Kỹ năng:</label>
-                <select>
+                <select v-model="skillSelected">
                     <option value="php">PHP</option>
                     <option value="js">Javascript</option>
                     <option value="java">Java</option>
@@ -34,15 +34,26 @@
 
 <script setup>
 import { ref } from 'vue'
+import axios from 'axios';
 const fullName= ref("")
 const phoneNum= ref("")
 const fullNameError= ref('')
 const fullNameSuccess= ref('')
 const phoneNumError= ref('')
 const phoneNumSuccess= ref('')
+const skillSelected= ref('')
 const submit= () =>{
-    if(fullName.value!=""&& phoneNum.value!=""){
+    if(fullNameSuccess.value=="Hợp lệ" &&  phoneNumSuccess.value=="Hợp lệ"){
+        const userData={
+            fullName: fullName.value,
+            phoneNum: phoneNum.value,
+            skill: skillSelected.value
+        }
+        axios.post('http://localhost:3000/list-user',userData)
+        console.log(userData)
     alert('Đăng ký thành công')
+    } else {
+        alert('Đăng ký không thành công')
     }
 }
 const validateFullName= ()=>{
@@ -66,10 +77,9 @@ const validatePhoneNum= ()=>{
         phoneNumError.value="Chỉ nhập 10 số"
         phoneNumSuccess.value=""
     }else if(!numRegex.test(phoneNum.value)){
-         phoneNumError.value="Chỉ được nhập số"
+        phoneNumError.value="Chỉ được nhập số"
         phoneNumSuccess.value=""
-    }
-    else{
+    }else{
         phoneNumError.value=""
         phoneNumSuccess.value="Hợp lệ"
     }

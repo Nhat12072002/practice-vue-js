@@ -20,8 +20,11 @@ const func= () =>{
 <style>
 .button-calc{
     width: 50px;
+    gap: 10px
 }
 .button-calc:hover{
     width: 50px;
+    gap: 10px
+
 }
 </style>

@@ -2,7 +2,7 @@
     <div class="container">
     <div class="form-container">
         <h1>Đăng ký thông tin nhân viên</h1>
-        <form @submit.prevent="submit()">
+        <form @submit.prevent="submit()" >
             <div class="fullName">
                 <label>Họ và tên:</label>
                 <input type="text" v-model="fullName" @input="validateFullName()" />
@@ -18,6 +18,7 @@
             <div class="skill">
                 <label>Kỹ năng:</label>
                 <select v-model="skillSelected">
+                    <option value="">Hãy chọn 1 skill</option>
                     <option value="php">PHP</option>
                     <option value="js">Javascript</option>
                     <option value="java">Java</option>
@@ -29,12 +30,28 @@
             </div>
         </form>
     </div>
+    <DialogComponent
+        :showDialog="showDialog"
+        :title="title"
+        :content="content"
+        @cancel="cancel()"
+        @submit="submitForm()"/>
     </div>
 </template>
 
 <script setup>
 import { ref } from 'vue'
 import axios from 'axios';
+import DialogComponent from '@/components/Form/DialogComponent.vue';
+const showDialog=ref(false)
+const title= ref('')
+const content= ref('')
+const cancel= () =>{
+    showDialog.value= false
+}
+const submitForm= ()=>{
+    showDialog.value= false
+}
 const fullName= ref("")
 const phoneNum= ref("")
 const fullNameError= ref('')
@@ -43,17 +60,20 @@ const phoneNumError= ref('')
 const phoneNumSuccess= ref('')
 const skillSelected= ref('')
 const submit= () =>{
-    if(fullNameSuccess.value=="Hợp lệ" &&  phoneNumSuccess.value=="Hợp lệ"){
+    if(fullNameSuccess.value=="Hợp lệ" &&  phoneNumSuccess.value=="Hợp lệ" && skillSelected.value!=""){
         const userData={
             fullName: fullName.value,
             phoneNum: phoneNum.value,
             skill: skillSelected.value
         }
         axios.post('http://localhost:3000/list-user',userData)
-        console.log(userData)
-    alert('Đăng ký thành công')
+       showDialog.value= true
+       title.value="Thành công"
+       content.value="Lưu thành công"
     } else {
-        alert('Đăng ký không thành công')
+    showDialog.value= true
+       title.value="Thất bại"
+       content.value="Lưu thất bại"
     }
 }
 const validateFullName= ()=>{

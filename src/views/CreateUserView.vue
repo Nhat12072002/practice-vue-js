@@ -43,6 +43,7 @@
 import { ref } from 'vue'
 import axios from 'axios';
 import DialogComponent from '@/components/Form/DialogComponent.vue';
+import { useRouter } from 'vue-router';
 const showDialog=ref(false)
 const title= ref('')
 const content= ref('')
@@ -50,7 +51,12 @@ const cancel= () =>{
     showDialog.value= false
 }
 const submitForm= ()=>{
-    showDialog.value= false
+    if(fullNameSuccess.value=="Hợp lệ" &&  phoneNumSuccess.value=="Hợp lệ" && skillSelected.value!=""){
+        router.push('/user')
+    } else {
+        showDialog.value= false
+    }
+
 }
 const fullName= ref("")
 const phoneNum= ref("")
@@ -59,6 +65,7 @@ const fullNameSuccess= ref('')
 const phoneNumError= ref('')
 const phoneNumSuccess= ref('')
 const skillSelected= ref('')
+const router= useRouter()
 const submit= () =>{
     if(fullNameSuccess.value=="Hợp lệ" &&  phoneNumSuccess.value=="Hợp lệ" && skillSelected.value!=""){
         const userData={

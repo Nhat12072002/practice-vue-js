@@ -2,6 +2,7 @@ import CalculatorView from '@/views/CalculatorView.vue'
 import CreateUserView from '@/views/CreateUserView.vue'
 import HomeView from '@/views/HomeView.vue'
 import ProductView from '@/views/ProductView.vue'
+import TodoView from '@/views/TodoView.vue'
 import UserManagementView from '@/views/UserManagementView.vue'
 import { createRouter, createWebHistory } from 'vue-router'
 const router = createRouter({
@@ -31,6 +32,11 @@ const router = createRouter({
       path: '/product',
       name: 'Product',
       component: ProductView
+    },
+    {
+      path: '/todo-list',
+      name: 'TodoList',
+      component: TodoView
     },
   ]
 })

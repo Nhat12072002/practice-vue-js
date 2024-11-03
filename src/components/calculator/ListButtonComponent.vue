@@ -13,5 +13,7 @@
     display: grid;
     grid-template-columns: repeat(3,1fr);
     margin-left: 10px;
+    gap: 10px;
+    margin-top: 10px;
 }
 </style>

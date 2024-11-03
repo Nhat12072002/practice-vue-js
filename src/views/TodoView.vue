@@ -7,10 +7,10 @@
         <div class="content">
         
         <div class="addTask">
-            <input type="text" placeholder="Vui lòng nhập tên task"/>
-            <button>Add Task</button>
+            <input type="text" placeholder="Vui lòng nhập tên task" v-model="taskName"/>
+            <button @click="addTask">Add Task</button>
             <div class="dropdown">
-                <button @click="confirmShowDropdown" class="btn-dropdown">Filter</button>
+                <button @click="confirmShowDropdown()" class="btn-dropdown">Filter</button>
                 <DropdownComponent :showDropdown="showDropdown">
                     <div class="dropdown-items">All</div>
                     <div class="dropdown-items">Completed</div>
@@ -19,7 +19,13 @@
             </div>
         </div>
         <div class="list-task">
-
+            <h2>List to-do</h2>
+            <ul v-for="todo in todoList" :key="todo.id">
+                <input type="checkbox"  :checked="todo.checkProgress"/>
+                <li>{{ todo.taskName }}</li>
+                <button class="btn-items" @click="deleteTask(todo.id)">Delete</button>
+                <button class="btn-items">Update</button>
+            </ul>
         </div>
     </div>
     </div>
@@ -28,7 +34,8 @@
 
 <script setup>
 import DropdownComponent from '@/components/Todo/DropdownComponent.vue';
-import { ref } from 'vue';
+import axios from 'axios';
+import { onMounted, ref } from 'vue';
 
 const showDropdown= ref(false)
 const confirmShowDropdown= ()=>{
@@ -38,6 +45,31 @@ const confirmShowDropdown= ()=>{
         showDropdown.value= false
     }
 }
+const todoList= ref([])
+const taskName= ref("")
+const checkProgress= ref(false)
+const addTask = async () => {
+    const AddTodo= {
+    taskName: taskName.value,
+    checkProgress: checkProgress.value
+    }   
+    await axios.post('http://localhost:3001/todo-list', AddTodo)   
+    const response=await axios.get('http://localhost:3001/todo-list')
+    todoList.value= response.data
+    taskName.value=""
+}
+
+onMounted(async ()=>{
+    const response=await axios.get('http://localhost:3001/todo-list')
+    todoList.value= response.data
+    console.log(todoList.value)
+})
+const deleteTask=async (todoId) =>{
+    await axios.delete(`http://localhost:3001/todo-list/${todoId}`)
+    const response=await axios.get('http://localhost:3001/todo-list')
+    todoList.value= response.data
+}
+
 </script>
 
 <style scoped>
@@ -97,5 +129,26 @@ input[type="text"] {
 .btn-dropdown{
     border-radius: 10px;
     width: 20%;
+}
+.list-task{
+    display: block;
+    width: 100%;
+}
+ul li{
+    list-style: none;
+    width: 100%;
+    justify-content: flex-start;
+}
+li{
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+ul{
+    display: flex;
+}
+.btn-items{
+    margin-left: 5px;
+    border-radius: 5px;
 }
 </style>

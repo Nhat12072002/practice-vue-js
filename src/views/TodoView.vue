@@ -1,77 +1,103 @@
 <template>
     <div class="container">
-    <div class="todo-container">
+      <div class="todo-container">
         <div class="header">
-            <h1>To-do List</h1>
+          <h1>To-do List</h1>
         </div>
         <div class="content">
-        
-        <div class="addTask">
-            <input type="text" placeholder="Vui lòng nhập tên task" v-model="taskName"/>
+          <div class="addTask">
+            <input type="text" placeholder="Vui lòng nhập tên task" v-model="taskName" />
             <button @click="addTask">Add Task</button>
             <div class="dropdown">
-                <button @click="confirmShowDropdown()" class="btn-dropdown">Filter</button>
-                <DropdownComponent :showDropdown="showDropdown">
-                    <div class="dropdown-items">All</div>
-                    <div class="dropdown-items">Completed</div>
-                    <div class="dropdown-items">Incompleted</div>
-                </DropdownComponent>
+              <button @click="confirmShowDropdown()" class="btn-dropdown">Filter</button>
+              <DropdownComponent :showDropdown="showDropdown">
+                <div class="dropdown-items">All</div>
+                <div class="dropdown-items">Completed</div>
+                <div class="dropdown-items">Incompleted</div>
+              </DropdownComponent>
             </div>
-        </div>
-        <div class="list-task">
+          </div>
+          <div class="list-task">
             <h2>List to-do</h2>
             <ul v-for="todo in todoList" :key="todo.id">
-                <input type="checkbox"  :checked="todo.checkProgress"/>
-                <li>{{ todo.taskName }}</li>
-                <button class="btn-items" @click="deleteTask(todo.id)">Delete</button>
-                <button class="btn-items">Update</button>
+              <input
+                type="checkbox"
+                v-model="todo.checkProgress"
+                @change="updateTask(todo, 'checkProgress')"
+              />
+              <li v-if="!todo.isEditing">{{ todo.taskName }}</li>
+              <input
+                v-else
+                type="text"
+                v-model="todo.taskName"
+                @keyup.enter="updateTask(todo, 'taskName')"
+              />
+              <button class="btn-items" @click="deleteTask(todo.id)">Delete</button>
+              <button class="btn-items" @click="toggleEditTask(todo)">
+                {{ todo.isEditing ? 'Save' : 'Update' }}
+              </button>
             </ul>
+          </div>
         </div>
+      </div>
     </div>
-    </div>
-</div>
-</template>
+  </template>
+  
+  <script setup>
+  import DropdownComponent from '@/components/Todo/DropdownComponent.vue';
+  import axios from 'axios';
+  import { onMounted, ref } from 'vue';
+  
+  const showDropdown = ref(false);
+  const confirmShowDropdown = () => {
+    showDropdown.value = !showDropdown.value;
+  };
+  
+  const todoList = ref([]);
+  const taskName = ref("");
+  const addTask = async () => {
+    const AddTodo = {
+      taskName: taskName.value,
+      checkProgress: false
+    };
+    await axios.post('http://localhost:3001/todo-list', AddTodo);
+    fetchTasks();
+    taskName.value = "";
+  };
+  
+  const fetchTasks = async () => {
+    const response = await axios.get('http://localhost:3001/todo-list');
+    todoList.value = response.data.map((task) => ({ ...task, isEditing: false }));
+  };
+  
+  onMounted(fetchTasks);
+  
+  const deleteTask = async (todoId) => {
+    await axios.delete(`http://localhost:3001/todo-list/${todoId}`);
+    fetchTasks();
+  };
+  
+  const toggleEditTask = (todo) => {
+    todo.isEditing = !todo.isEditing;
+  };
+  
+  const updateTask = async (todo, field) => {
+    const updatedData = {};
+    if (field === 'taskName') {
+      updatedData.checkProgress = todo.checkProgress;
+      updatedData.taskName = todo.taskName;
+    } else if (field === 'checkProgress') {
+      updatedData.checkProgress = todo.checkProgress;
+      updatedData.taskName = todo.taskName;
 
-<script setup>
-import DropdownComponent from '@/components/Todo/DropdownComponent.vue';
-import axios from 'axios';
-import { onMounted, ref } from 'vue';
-
-const showDropdown= ref(false)
-const confirmShowDropdown= ()=>{
-    if(showDropdown.value == false){
-    showDropdown.value=true
-    } else {
-        showDropdown.value= false
     }
-}
-const todoList= ref([])
-const taskName= ref("")
-const checkProgress= ref(false)
-const addTask = async () => {
-    const AddTodo= {
-    taskName: taskName.value,
-    checkProgress: checkProgress.value
-    }   
-    await axios.post('http://localhost:3001/todo-list', AddTodo)   
-    const response=await axios.get('http://localhost:3001/todo-list')
-    todoList.value= response.data
-    taskName.value=""
-}
-
-onMounted(async ()=>{
-    const response=await axios.get('http://localhost:3001/todo-list')
-    todoList.value= response.data
-    console.log(todoList.value)
-})
-const deleteTask=async (todoId) =>{
-    await axios.delete(`http://localhost:3001/todo-list/${todoId}`)
-    const response=await axios.get('http://localhost:3001/todo-list')
-    todoList.value= response.data
-}
-
-</script>
-
+  
+    await axios.put(`http://localhost:3001/todo-list/${todo.id}`, updatedData);
+    todo.isEditing = false;
+    fetchTasks();
+  };
+  </script>
+  
 <style scoped>
 .container{
     width: 100%;

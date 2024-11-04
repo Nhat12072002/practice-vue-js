@@ -26,7 +26,7 @@ const submit= ()=>{
 }
 </script>
 
-<style>
+<style scoped>
 .container-form{
     position: fixed;
     top: 0;

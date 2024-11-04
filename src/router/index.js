@@ -4,6 +4,7 @@ import HomeView from '@/views/HomeView.vue'
 import ProductView from '@/views/ProductView.vue'
 import TodoView from '@/views/TodoView.vue'
 import UserManagementView from '@/views/UserManagementView.vue'
+import WeatherView from '@/views/WeatherView.vue'
 import { createRouter, createWebHistory } from 'vue-router'
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -37,6 +38,11 @@ const router = createRouter({
       path: '/todo-list',
       name: 'TodoList',
       component: TodoView
+    },
+    {
+      path: '/weather',
+      name: 'Weather',
+      component: WeatherView
     },
   ]
 })

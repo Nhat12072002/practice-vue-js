@@ -6,6 +6,7 @@
         <RouterLink class="nav-link" to="/calculator">Calculator</RouterLink>
         <RouterLink class="nav-link" to="/product">Product</RouterLink>
         <RouterLink class="nav-link" to="/todo-list">To-do List</RouterLink>
+        <RouterLink class="nav-link" to="/weather">Weather Forecast</RouterLink>
 
 
       </nav>

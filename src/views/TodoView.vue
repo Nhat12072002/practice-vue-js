@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div class="container" :class="{'dark-mode':isDarkMode}">
       <div class="todo-container">
         <div class="header">
           <h1>To-do List</h1>
@@ -47,7 +47,8 @@
   import DropdownComponent from '@/components/Todo/DropdownComponent.vue';
   import axios from 'axios';
   import { onMounted, ref } from 'vue';
-  
+  import useDarkMode from '../composables/userDarkMode.js';
+const { isDarkMode } = useDarkMode();
   const showDropdown = ref(false);
   const confirmShowDropdown = () => {
     showDropdown.value = !showDropdown.value;
@@ -97,15 +98,15 @@
     fetchTasks();
   };
   </script>
-  
-<style scoped>
-.container{
+  <style scoped>
+  .container {
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-}
-.todo-container{
+  }
+  
+  .todo-container {
     width: 50%;
     border: black solid 1px;
     margin-top: 20px;
@@ -116,8 +117,9 @@
     border-radius: 20px;
     padding: 20px;
     background-color: gray;
-}
-.content{
+  }
+  
+  .content {
     background-color: white;
     padding: 50px;
     width: 80%;
@@ -126,55 +128,90 @@
     flex-direction: column;
     align-items: center;
     border-radius: 20px;
-}
-.addTask{
+  }
+  
+  .addTask {
     width: 100%;
-    height: 100%x;
-}
-input[type="text"] {
+  }
+  
+  input[type="text"] {
     height: 35px;
     margin-right: 10px;
     width: 85%;
-}
-.dropdown{
+  }
+  
+  .dropdown {
     width: 100%;
     margin-top: 10px;
-}
-.dropdown-items{
+  }
+  
+  .dropdown-items {
     border: black solid 1px;
     width: 100%;
     text-align: center;
     border-radius: 20px;
-}
-.dropdown-items:hover{
-    border: black solid 1px;
-    width: 100%;
-    text-align: center;
-    background-color: rgb(0,0,0,0.5);
-}
-.btn-dropdown{
+  }
+  
+  .dropdown-items:hover {
+    background-color: rgb(0, 0, 0, 0.5);
+  }
+  
+  .btn-dropdown {
     border-radius: 10px;
     width: 20%;
-}
-.list-task{
+  }
+  
+  .list-task {
     display: block;
     width: 100%;
-}
-ul li{
+  }
+  
+  ul li {
     list-style: none;
     width: 100%;
     justify-content: flex-start;
-}
-li{
+  }
+  
+  li {
     align-items: center;
     justify-content: center;
     display: flex;
-}
-ul{
+  }
+  
+  ul {
     display: flex;
-}
-.btn-items{
+  }
+  
+  .btn-items {
     margin-left: 5px;
     border-radius: 5px;
-}
-</style>
+  }
+  
+  .container.dark-mode .todo-container {
+    background-color: #333;
+  }
+  
+  .container.dark-mode .content {
+    background-color: white;
+  }
+  
+  .container.dark-mode input[type="text"],
+  .container.dark-mode .btn-items,
+  .container.dark-mode .btn-dropdown {
+    background-color: #555;
+    color: white;
+  }
+  
+  .container.dark-mode .dropdown-items {
+    background-color: #444;
+    border-color: #555;
+  }
+  
+  .container.dark-mode .dropdown-items:hover {
+    background-color: #666;
+  }
+  
+  .container.dark-mode li span {
+    color: white;
+  }
+  </style>

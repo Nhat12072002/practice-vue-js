@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div class="container" :class="{ 'dark-mode': isDarkMode }">
     <div class="form-container">
         <h1>Đăng ký thông tin nhân viên</h1>
         <form @submit.prevent="submit()" >
@@ -44,6 +44,9 @@ import { ref } from 'vue'
 import axios from 'axios';
 import DialogComponent from '@/components/Form/DialogComponent.vue';
 import { useRouter } from 'vue-router';
+import useDarkMode from '../composables/userDarkMode.js';
+const { isDarkMode } = useDarkMode();
+
 const showDialog=ref(false)
 const title= ref('')
 const content= ref('')
@@ -114,42 +117,90 @@ const validatePhoneNum= ()=>{
 </script>
 
 <style scoped>
-.container{
+.container {
     display: grid;
     align-items: center;
     justify-content: center;
+    transition: background-color 0.3s, color 0.3s;
 }
-.form-container{
-    border: black solid 1px;
+
+.form-container {
+    border: 1px solid black;
     margin-top: 20px;
     padding: 30px;
+    transition: background-color 0.3s, color 0.3s;
 }
-form{
+
+form {
     margin-top: 20px;
 }
+
 .fullName,
 .phoneNum,
 .skill,
-button{
+button {
     margin-top: 20px;
 }
+
 button,
 input[type="text"],
 input[type="tel"],
-select{
+select {
     width: 200px;
     border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
 }
+
 .submit,
 input[type="text"],
 input[type="tel"],
-select{
+select {
     float: right;
 }
-.error{
+
+.error {
     color: red;
 }
-.success{
+
+.success {
     color: green;
 }
+
+.dark-mode {
+    background-color: #2d2d2d;
+    color: white;
+    width: 100%;
+    height: 100%;
+}
+
+.dark-mode .form-container {
+    padding: 50px;
+    background-color: #3a3a3a;
+    border: 1px solid #444;
+}
+
+.dark-mode .error {
+    color: #ff6b6b;
+}
+
+.dark-mode .success {
+    color: #a0e8a1;
+}
+
+.dark-mode button,
+.dark-mode input[type="text"],
+.dark-mode input[type="tel"],
+.dark-mode select {
+    background-color: #444;
+    color: white;
+    border: 1px solid #666;
+}
+
+.dark-mode button:hover,
+.dark-mode input[type="text"]:hover,
+.dark-mode input[type="tel"]:hover,
+.dark-mode select:hover {
+    background-color: #555;
+}
+
 </style>

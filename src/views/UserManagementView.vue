@@ -1,5 +1,5 @@
 <template>
-    <div class="user-container">
+    <div class="user-container":class="{'dark-mode':isDarkMode}">
         <h1>Quản lý nhân viên</h1>
         <div>
             <button @click="createForm()">Create New User</button>
@@ -30,6 +30,8 @@
 import axios from "axios";
 import { ref } from "vue";
 import { useRouter } from "vue-router"
+import useDarkMode from '../composables/userDarkMode.js';
+const { isDarkMode } = useDarkMode();
 const router= useRouter()
 const createForm = () => {
     router.push('/user/createUser')
@@ -83,5 +85,36 @@ td{
 }
 tr:hover{
     background-color: rgb(192, 201, 201);
+}
+.dark-mode {
+    background-color: #121212;
+    color: #ffffff;
+}
+
+.dark-mode button {
+    background-color: #333;
+    color: #fff;
+}
+
+.dark-mode button:hover {
+    background-color: #555;
+}
+
+.dark-mode table {
+    border: 1px solid #333;
+}
+
+.dark-mode th {
+    background-color: #444;
+    color: #fff;
+}
+
+.dark-mode td {
+    background-color: #333;
+    color: #fff;
+}
+
+.dark-mode tr:hover {
+    background-color: #555;
 }
 </style>

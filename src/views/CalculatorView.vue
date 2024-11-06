@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div class="container" :class="{ 'dark-mode': isDarkMode }">
     <div class="calculator-container">
         <h1>Máy tính bỏ túi</h1>
         <div class="result">
@@ -27,10 +27,12 @@
 </template>
 
 <script setup>
+import useDarkMode from '../composables/userDarkMode.js';
 import ResultComponent from "@/components/calculator/ResultComponent.vue"
 import ButtonComponent from "@/components/calculator/ButtonComponent.vue"
 import ListButtonComponent from "@/components/calculator/ListButtonComponent.vue"
 import { ref } from "vue"
+const { isDarkMode } = useDarkMode();
 const valueDisplay= ref('')
 const input = (value)=>{
     valueDisplay.value+=value
@@ -44,21 +46,70 @@ const clearAll= () => {
 </script>
 
 <style scoped>
-.container{
+.container {
     display: grid;
     align-items: center;
     justify-content: center;
     margin-top: 30px;
 }
-.calculator-container{
+
+.calculator-container {
     width: 300px;
-    border: black solid 1px;
+    border: 1px solid black;
     padding: 20px;
     display: grid;
     align-items: center;
     justify-content: center;
+    background-color: white;
+    color: black;
+    border-radius: 10px;
+    transition: background-color 0.3s, color 0.3s;
 }
-h1{
+.dark-mode .container{
+    background-color: #2d2d2d; 
+    padding: 50px;
+}
+.dark-mode .calculator-container {
+    background-color: #2d2d2d; 
+    color: white; 
+    border-color: #444; 
+}
+
+h1 {
     text-align: center;
+    font-size: 24px;
+    margin-bottom: 20px;
+    transition: color 0.3s;
 }
+
+.dark-mode h1 {
+    color: #e0e0e0;
+}
+
+button {
+    padding: 10px;
+    margin: 5px;
+    font-size: 18px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    background-color: #f0f0f0;
+    color: black;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+button:hover {
+    background-color: #d0d0d0;
+}
+
+.dark-mode button {
+    background-color: #444; 
+    color: white; 
+    border-color: #666; 
+}
+
+.dark-mode button:hover {
+    background-color: #555; 
+}
+
 </style>

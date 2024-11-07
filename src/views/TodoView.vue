@@ -61,20 +61,20 @@ const { isDarkMode } = useDarkMode();
       taskName: taskName.value,
       checkProgress: false
     };
-    await axios.post('http://localhost:3001/todo-list', AddTodo);
+    await axios.post('http://localhost:3002/todo-list', AddTodo);
     fetchTasks();
     taskName.value = "";
   };
   
   const fetchTasks = async () => {
-    const response = await axios.get('http://localhost:3001/todo-list');
+    const response = await axios.get('http://localhost:3002/todo-list');
     todoList.value = response.data.map((task) => ({ ...task, isEditing: false }));
   };
   
   onMounted(fetchTasks);
   
   const deleteTask = async (todoId) => {
-    await axios.delete(`http://localhost:3001/todo-list/${todoId}`);
+    await axios.delete(`http://localhost:3002/todo-list/${todoId}`);
     fetchTasks();
   };
   
@@ -93,7 +93,7 @@ const { isDarkMode } = useDarkMode();
 
     }
   
-    await axios.put(`http://localhost:3001/todo-list/${todo.id}`, updatedData);
+    await axios.put(`http://localhost:3002/todo-list/${todo.id}`, updatedData);
     todo.isEditing = false;
     fetchTasks();
   };

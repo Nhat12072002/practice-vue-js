@@ -1,6 +1,9 @@
+import BlogView from '@/views/BlogView.vue'
 import CalculatorView from '@/views/CalculatorView.vue'
+import CourseView from '@/views/CourseView.vue'
 import CreateUserView from '@/views/CreateUserView.vue'
 import HomeView from '@/views/HomeView.vue'
+import PostView from '@/views/PostView.vue'
 import ProductView from '@/views/ProductView.vue'
 import TodoView from '@/views/TodoView.vue'
 import UserManagementView from '@/views/UserManagementView.vue'
@@ -43,6 +46,21 @@ const router = createRouter({
       path: '/weather',
       name: 'Weather',
       component: WeatherView
+    },
+    {
+      path: '/blog',
+      name: 'Blog',
+      component: BlogView
+    },
+    {
+      path: '/blog/get-all',
+      name: 'PostBlog',
+      component: PostView
+    },
+    {
+      path: '/blog/course',
+      name: 'Course',
+      component: CourseView
     },
   ]
 })

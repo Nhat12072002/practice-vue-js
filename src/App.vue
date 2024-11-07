@@ -7,6 +7,7 @@
       <RouterLink class="nav-link" to="/product">Product</RouterLink>
       <RouterLink class="nav-link" to="/todo-list">To-do List</RouterLink>
       <RouterLink class="nav-link" to="/weather">Weather Forecast</RouterLink>
+      <RouterLink class="nav-link" to="/blog">Blog</RouterLink>
       <a class="nav-link" @click="toggleDarkMode">
         Dark Mode
       </a>
@@ -22,7 +23,7 @@ import useDarkMode from './composables/userDarkMode';
 const { isDarkMode, toggleDarkMode } = useDarkMode();
 </script>
 
-<style>
+<style scoped>
 nav {
   height: 50px;
   background-color: antiquewhite;

@@ -76,7 +76,7 @@ const submit= () =>{
             phoneNum: phoneNum.value,
             skill: skillSelected.value
         }
-        axios.post('http://localhost:3000/list-user',userData)
+        axios.post('http://localhost:3001/list-user',userData)
        showDialog.value= true
        title.value="Thành công"
        content.value="Lưu thành công"

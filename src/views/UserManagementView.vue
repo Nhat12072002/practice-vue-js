@@ -43,7 +43,7 @@ const skillOption= {
     vuejs: "VueJS"
 }
 const users= ref([])
-axios.get('http://localhost:3000/list-user').then(response =>{
+axios.get('http://localhost:3001/list-user').then(response =>{
     users.value= response.data
 })
 </script>

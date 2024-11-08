@@ -19,7 +19,6 @@
 <script setup>
 import { RouterLink, RouterView } from "vue-router";
 import useDarkMode from './composables/userDarkMode';
-
 const { isDarkMode, toggleDarkMode } = useDarkMode();
 </script>
 

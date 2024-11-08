@@ -27,7 +27,24 @@
         class="dialog-container"
       >
         <template v-slot:content>
-          <!-- Nội dung hướng dẫn -->
+          <div>
+            <h2>Giới thiệu:</h2>
+            <p>
+                Tính năng "Thời tiết" cho phép bạn theo dõi thời tiết hiện tại và tương lai của các thành phố bạn chọn.
+            </p>
+        
+            <h3>Cách thức hoạt động:</h3>
+            <ol>
+                <li>Tìm kiếm thành phố của bạn bằng cách nhập tên vào thanh tìm kiếm.</li>
+                <li>Chọn một thành phố trong kết quả, điều này sẽ đưa bạn đến thông tin thời tiết hiện tại của thành phố đó.</li>
+                <li>Theo dõi thành phố bằng cách nhấp vào biểu tượng "+" ở góc trên bên phải. Điều này sẽ lưu thành phố để bạn có thể xem lại sau trên trang chính.</li>
+            </ol>
+        
+            <h3>Xóa một thành phố:</h3>
+            <p>
+                Nếu bạn không còn muốn theo dõi một thành phố, chỉ cần chọn thành phố đó trong trang chính. Ở dưới cùng của trang sẽ có tùy chọn xóa thành phố.
+            </p>
+        </div>
         </template>
       </DialogGuideComponent>
       <ListCityComponent class="list-city-container">

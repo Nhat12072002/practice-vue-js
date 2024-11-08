@@ -4,10 +4,9 @@
             <nav>
                     <RouterLink class="nav-link" to="/blog/get-all">Post</RouterLink>
                     <RouterLink class="nav-link" to="/blog/course">Course</RouterLink>
-                    <RouterView></RouterView>
-
             </nav>
         </div>
+        <RouterView></RouterView>
         <div class="content">
             <h1>Hello my blog</h1>
             <p>I put some of my posts in series so you can read it with more context 🥰</p>

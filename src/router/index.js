@@ -1,5 +1,6 @@
 import BlogView from '@/views/BlogView.vue'
 import CalculatorView from '@/views/CalculatorView.vue'
+import CourseDetailView from '@/views/CourseDetailView.vue'
 import CourseView from '@/views/CourseView.vue'
 import CreateUserView from '@/views/CreateUserView.vue'
 import HomeView from '@/views/HomeView.vue'
@@ -61,6 +62,11 @@ const router = createRouter({
       path: '/blog/course',
       name: 'Course',
       component: CourseView
+    },
+    {
+      path: '/blog/get/:id',
+      name: 'CourseDetail',
+      component: CourseDetailView
     },
   ]
 })

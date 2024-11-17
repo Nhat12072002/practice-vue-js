@@ -1,5 +1,6 @@
 import BlogView from '@/views/BlogView.vue'
 import CalculatorView from '@/views/CalculatorView.vue'
+import CountDownView from '@/views/CountDownView.vue'
 import CourseDetailView from '@/views/CourseDetailView.vue'
 import CourseView from '@/views/CourseView.vue'
 import CreateUserView from '@/views/CreateUserView.vue'
@@ -68,7 +69,14 @@ const router = createRouter({
       name: 'CourseDetail',
       component: CourseDetailView
     },
+    {
+      path: '/countdown',
+      name: 'Countdown',
+      component: CountDownView
+    },
   ]
 })
 
 export default router
+
+

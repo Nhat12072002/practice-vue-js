@@ -8,6 +8,7 @@
       <RouterLink class="nav-link" to="/todo-list">To-do List</RouterLink>
       <RouterLink class="nav-link" to="/weather">Weather Forecast</RouterLink>
       <RouterLink class="nav-link" to="/blog">Blog</RouterLink>
+      <RouterLink class="nav-link" to="/countdown">Countdown</RouterLink>
       <a class="nav-link" @click="toggleDarkMode">
         Dark Mode
       </a>

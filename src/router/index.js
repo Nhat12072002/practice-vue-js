@@ -1,3 +1,4 @@
+import AddToCartView from '@/views/AddToCartView.vue'
 import BlogView from '@/views/BlogView.vue'
 import CalculatorView from '@/views/CalculatorView.vue'
 import CountDownView from '@/views/CountDownView.vue'
@@ -73,6 +74,11 @@ const router = createRouter({
       path: '/countdown',
       name: 'Countdown',
       component: CountDownView
+    },
+    {
+      path: '/addToCart',
+      name: 'AddToCart',
+      component: AddToCartView
     },
   ]
 })
